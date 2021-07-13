@@ -1,7 +1,7 @@
 name = "SQLiteDF"
 uuid = "289a3227-1041-4740-9a48-9a9497380b0c"
 authors = ["Daniel Lakeland <dlakelan@street-artists.org>"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 SQLite = "0aa819cd-b072-5ff4-a722-6bc24af294d9"
