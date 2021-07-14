@@ -8,3 +8,4 @@ SQLite = "0aa819cd-b072-5ff4-a722-6bc24af294d9"
 
 [compat]
 julia = "1.6.0"
+SQLite = "1.1.4,2.0.0"
