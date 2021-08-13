@@ -10,14 +10,17 @@ example:
 mydf = @sqlitedf(a,b,"select a.*,b.* from a join b on a.foo=b.foo") |> DataFrame()
 """
 macro sqlitedf(a...)
+    q = a[end]
+    tabs = a[1:end-1]
+    names = String.(tabs)
     db = gensym()
-    return esc(quote
-        $db = SQLite.DB();
-        for sym in $(a[1:end-1])
-            SQLite.load!(eval(sym),$db,String(sym))
-        end;
-        SQLite.DBInterface.execute($db,$(a[end]))
-    end)
+    code = :(begin end)
+    push!(code.args,esc(:($db = SQLite.DB())))
+    for (tab,name) in zip(tabs,names)
+        push!(code.args,esc(:(SQLite.load!($tab,$db,$name))))
+    end
+    push!(code.args,esc(:(SQLite.DBInterface.execute($db,$q))))
+    return code
 end
 
 end

@@ -27,3 +27,10 @@ cc = DataFrame(foo=["one","two","three"],bar=[1,2,3],baz=["ONE","TWO","THREE"])
 c = @sqlitedf(a,b,"select a.*,b.baz from a join b on a.foo=b.foo") |> DataFrame
 
 @test c == cc
+
+function foo(a,b)
+    @sqlitedf(a,b,"select a.*,b.baz from a join b on a.foo=b.foo") |> DataFrame
+end
+
+ccc = foo(a,b)
+@test c == ccc
